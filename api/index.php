@@ -51,6 +51,7 @@ function deliver_response($format, $api_response){
  
     // Set HTTP Response
     header('HTTP/1.1 '.$api_response['status'].' '.$http_response_code[ $api_response['status'] ]);
+    header('Access-Control-Allow-Credentials: true');
  
     // Process different content types
     if( strcasecmp($format,'json') == 0 ){
@@ -95,7 +96,7 @@ function deliver_response($format, $api_response){
 }
  
 // Define whether an HTTPS connection is required
-$HTTPS_required = TRUE;
+$HTTPS_required = FALSE;
  
 // Define whether user authentication is required
 $authentication_required = TRUE;
@@ -197,7 +198,7 @@ if( strcasecmp($_GET['method'],'hello') == 0){
 if( strcasecmp($_GET['method'],'profile') == 0){
     
     if(!isset($_SESSION["profile_id"])) {
-      echo('no profile id sessin variable');
+      echo('no profile id session variable');
       exit(0);
     } 	
     
